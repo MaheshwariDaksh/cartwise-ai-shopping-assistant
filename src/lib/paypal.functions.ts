@@ -75,7 +75,7 @@ export const createPaypalOrder = createServerFn({ method: "POST" })
         ],
       };
       if (data.mode === "redirect") {
-        body.payment_source = {
+        body["payment_source"] = {
           paypal: {
             experience_context: {
               brand_name: "CartWise AI (Sandbox)",
@@ -106,7 +106,7 @@ export const createPaypalOrder = createServerFn({ method: "POST" })
 
 export type CaptureResult =
   | { ok: true; orderId: string; captureId: string; productName: string; amount: string }
-  | { ok: false; error: string; status?: string };
+  | { ok: false; error: string; status?: string | undefined };
 
 export const capturePaypalOrder = createServerFn({ method: "POST" })
   .inputValidator((d) => z.object({ orderId: z.string().regex(/^[A-Z0-9]{5,40}$/) }).parse(d))

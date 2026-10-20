@@ -12,7 +12,7 @@ describe("finalizeShortlist", () => {
   });
   it("uses server price S$89.90 for headphones", () => {
     const r = finalizeShortlist([{ id: "quietform-headphones", priceCents: 1 }], 9000);
-    expect(r[0].priceCents).toBe(8990);
+    expect(r[0]?.priceCents).toBe(8990);
   });
   it("handles malformed picks", () => {
     expect(finalizeShortlist("nope", 10000)).toEqual([]);
